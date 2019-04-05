@@ -1,0 +1,39 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+div.home_page_cont{
+  width: 100%;
+  margin-top: 40px;
+  div.movie_title_form_cont{
+    margin: 0 auto;
+    form.new_movie{
+      display: block;
+      text-align: center;
+    }
+  }
+  div.movie_title_form_search_result_cont{
+    div.error_msg_div{
+      text-align: center;
+      color: red;
+      font-size: 32px;
+      padding-top: 40px;
+    }
+    div.search_result_cont_inner_frame{
+      text-align: center;
+      div.title_box{
+        span{
+
+        }
+      }
+      div.poster_box{
+
+      }
+      div.plot_box{
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: left;
+        padding-top: 20px;
+      }
+    }
+  }
+}

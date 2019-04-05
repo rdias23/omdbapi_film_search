@@ -1,0 +1,10 @@
+<div class="home_page_cont">
+  <div class="movie_title_form_cont">
+    <%= form_for @movie, :url => url_for(:controller => 'movies', :action => 'search'), remote: true do |f| %>
+     <%= f.text_field :title %>
+     <%= f.submit "Search" %>
+    <% end %>
+  </div>
+  <div class="movie_title_form_search_result_cont">
+  </div>
+</div>

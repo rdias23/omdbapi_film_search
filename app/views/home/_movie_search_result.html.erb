@@ -1,0 +1,22 @@
+
+<% if @errors_msg %>
+  <div class="error_msg_div">
+    <%= @errors_msg %>
+  </div>
+<% end %>
+
+<% unless @errors_msg %>
+  <div class="search_result_cont_inner_frame">
+    <div class="title_box">
+      <%= @movie.title %>
+      <br/>
+      <span><%= @movie.year %></span>
+    </div>
+    <div class="poster_box">
+      <img src="<%= @movie.poster %>" alt="Movie Poster">
+    </div>
+    <div class="plot_box">
+      <%= @movie.plot %>
+    </div>
+  </div>
+<% end %>
