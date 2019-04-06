@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  favorites_list_id: 1
+  movie_id: 1
+  position: 1
+
+two:
+  favorites_list_id: 1
+  movie_id: 1
+  position: 1

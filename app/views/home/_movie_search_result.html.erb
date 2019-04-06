@@ -7,8 +7,17 @@
 
 <% unless @errors_msg %>
   <div class="search_result_cont_inner_frame">
+    <div class="movie_favorite_cont">
+        <%= form_for @movie, :url => url_for(:controller => 'movies', :action => @select_or_deselect_action), remote: true do |f| %>
+           <% (Movie.column_names - ["created_at", "updated_at"]).each do |name| %>
+             <%= f.hidden_field name.to_sym, :value => @movie.send(name) %>
+           <% end %>
+           <%= f.submit (@select_or_deselect_action == MoviesController::SELECT_ACTIONS[:SELECT] ?
+             "Add to Favorites" : "Remove from Favorites") %>
+        <% end %>
+    </div>
     <div class="title_box">
-      <%= @movie.title %>
+        <%= @movie.title %>
       <br/>
       <span><%= @movie.year %></span>
     </div>

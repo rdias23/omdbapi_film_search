@@ -1,0 +1,9 @@
+
+<div class="movie_fave_item">
+  <span class="movie_title"><span class="movie_rank"><%= favorites_list.favorite_selections.find { |fs| fs.movie_id == movie.id }.position.to_s + "." %></span><%= movie.title %></span>
+     <%= form_for movie, :url => url_for(:controller => 'movies', :action => 'edit'), remote: true do |f| %>
+       <%= f.hidden_field :title %>
+       <%= f.hidden_field :imdb_id %>
+     <%= f.submit "View" %>
+    <% end %>
+</div>

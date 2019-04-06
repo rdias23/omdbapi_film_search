@@ -1,0 +1,5 @@
+<% @user.favorites_list.movies.each do |movie| %>
+      <%= render :partial => "/home/fave_item", :locals => {
+                 :movie => movie,
+                 :favorites_list => @user.favorites_list } %>
+<% end %>
