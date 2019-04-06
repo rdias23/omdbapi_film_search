@@ -1,6 +1,11 @@
+<div class="faves_list_header">
+  Favorites List
+  <hr>
+</div>
 <% @user.favorites_list.movies.each.with_index do |movie,index| %>
       <%= render :partial => "/home/fave_item", :locals => {
                  :movie => movie,
                  :favorites_list => @user.favorites_list,
-                 :rank => index + 1 } %>
+                 :rank => index + 1,
+                 :user => @user } %>
 <% end %>

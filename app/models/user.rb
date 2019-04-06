@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_one :favorites_list
   has_many :movie_comments
+  has_many :movie_ratings
 
   after_create :add_favorites_list
 

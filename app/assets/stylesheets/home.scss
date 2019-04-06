@@ -1,9 +1,15 @@
 // Place all the styles related to the Home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+html{
+  min-width: 500px;
+}
+
 div.home_page_cont{
-  width: 100%;
   margin-top: 40px;
+  margin-left: 0px;
+  margin-right: 0px;
   div.movie_title_form_cont{
     margin: 0 auto;
     form.new_movie{
@@ -22,6 +28,8 @@ div.home_page_cont{
       text-align: center;
       padding: 20px;
       div.title_box{
+        font-size: 26px;
+        font-style: italic;
         span{
 
         }
@@ -36,6 +44,7 @@ div.home_page_cont{
         div.comment_and_rating{
           float: right;
           width: calc(100% - 300px);
+          padding-left: 40px;
         }
       }
       div.plot_box{
@@ -43,6 +52,40 @@ div.home_page_cont{
         margin: 0 auto;
         text-align: left;
         padding-top: 20px;
+      }
+    }
+  }
+  div.faves_list{
+    border: 1px solid grey;
+    div.faves_list_header{
+      font-size: 26px;
+      font-style: italic;
+    }
+    div.movie_fave_item{
+      div.fave_item_inner_frame{
+        div.movie_title_and_view_cont{
+          span.movie_title{
+            span.movie_rank{
+
+            }
+          }
+        }
+        div.arrow_box{
+          form.up_arrow{
+            input{
+            }
+          }
+          form.down_arrow{
+            input{
+              -webkit-transform: rotate(180deg);
+              -moz-transform: rotate(180deg);
+              -o-transform: rotate(180deg);
+              -ms-transform: rotate(180deg);
+              transform: rotate(180deg);
+            }
+          }
+        }
+
       }
     }
   }

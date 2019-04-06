@@ -32,6 +32,7 @@ class MoviesController < ApplicationController
 
     @movie_comment = @user.yield_movie_comment_of_user @movie
 
+    @rating = @movie.movie_ratings.find { |mr| mr.user_id == @user.id } || MovieRating.new
     respond_to do |format|
       format.js { render :file => "/home/search.js.erb" }
     end
@@ -49,21 +50,18 @@ class MoviesController < ApplicationController
                                  else
                                    SELECT_ACTIONS[:SELECT]
                                  end
-
+    @rating = @movie.movie_ratings.find { |mr| mr.user_id == @user.id } || MovieRating.new
     respond_to do |format|
       format.js { render :file => "/home/search.js.erb" }
     end
   end
 
   def favorite_selection
-     if params["movie"]["id"].blank?
-       @movie = Movie.create(movie_params)
-     else
-       @movie = Movie.find(params["movie"]["id"])
-     end
+     @movie = Movie.find(params["movie"]["id"])
      @errors_msg = false
      @user = current_user
      @movie_comment = @user.yield_movie_comment_of_user @movie
+     @rating = @movie.movie_ratings.find { |mr| mr.user_id == @user.id } || MovieRating.new
 
      @select_or_deselect_action = SELECT_ACTIONS[:DESELECT]
 
@@ -78,6 +76,7 @@ class MoviesController < ApplicationController
     @errors_msg = false
     @user = current_user
     @movie_comment = @user.yield_movie_comment_of_user @movie
+    @rating = @movie.movie_ratings.find { |mr| mr.user_id == @user.id } || MovieRating.new
 
     @select_or_deselect_action = SELECT_ACTIONS[:SELECT]
 
@@ -111,10 +110,25 @@ class MoviesController < ApplicationController
     end
   end
 
+  def update_rating
+    if params["movie_rating"]["id"].blank?
+      @movie_rating = MovieRating.create(movie_rating_params)
+    else
+      @movie_rating = MovieRating.find(params["movie_rating"]["id"]).update_attributes(movie_rating_params)
+    end
+    respond_to do |format|
+      format.js { render :file => "/home/update_rating.js.erb" }
+    end
+  end
+
   private
 
   def movie_params
     params.require(:movie).permit(:id, :title, :director, :year, :rated, :plot, :poster, :response_json, :imdb_id)
+  end
+
+  def movie_rating_params
+    params.require(:movie_rating).permit(:rating_star_num, :user_id, :movie_id, :id)
   end
 
   def build_movie_attrs response

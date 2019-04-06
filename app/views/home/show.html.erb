@@ -1,17 +1,13 @@
-<div class="home_page_cont">
-  <div class="row">
+<div class="home_page_cont row">
     <div class="movie_title_form_cont col-12">
       <%= form_for @movie, :url => url_for(:controller => 'movies', :action => 'search'), remote: true do |f| %>
        <%= f.text_field :title %>
-       <%= f.submit "Search" %>
+       <%= f.submit "Search by Title" %>
       <% end %>
     </div>
-  </div>
-  <div class="row">
     <div class="movie_title_form_search_result_cont col-12 col-md-9">
     </div>
-    <div style="background: red" class="faves_list col-12 col-md-3">
+    <div style="" class="faves_list col-12 col-md-3">
       <%= render :partial => "/home/faves_list", :locals => { } %>
     </div>
-  </div>
 </div>

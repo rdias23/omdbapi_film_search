@@ -25,6 +25,13 @@
       <img src="<%= @movie.poster %>" alt="Movie Poster">
       <div class="comment_and_rating">
         <div class="rating_box">
+          <%= form_for @rating, :url => url_for(:controller => 'movies', :action => 'update_rating'),:html=>{:id=>'rating_form'}, remote: true do |f| %>
+           <%= f.select :rating_star_num, [["None", nil],["1 Star",1], ["2 Star", 2], ["3 Star", 3], ["4 Star", 4]], :selected => @rating.rating_star_num, onchange: 'javascript: $( this ).trigger("submit.rails")' %>
+             <%= f.hidden_field :user_id, :value => @user.id %>
+             <%= f.hidden_field :movie_id, :value => @movie.id %>
+             <%= f.hidden_field :id, :value => @rating.id %>
+           <%= f.submit "Update Rating" %>
+          <% end %>
         </div>
         <div class="comment_box">
            <div class="comment_box_actual">

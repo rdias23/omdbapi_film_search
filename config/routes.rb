@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   patch 'movies/favorite_selection' => 'movies#favorite_selection', :as => 'patch_movies_favorite_selection'
   patch 'movies/remove_favorite' => 'movies#remove_favorite', :as => 'movies_remove_favorite'
 
+  post 'movies/update_rating ' => 'movies#update_rating', :as => 'movies_update_rating'
+  patch 'movies/update_rating ' => 'movies#update_rating', :as => 'patch_movies_update_rating'
+
   post 'movie_comments/edit' => 'movie_comments#edit', :as => 'movie_comments_edit'
   patch 'movie_comments/edit' => 'movie_comments#edit', :as => 'patch_movie_comments_edit'
   post 'movie_comments/update' => 'movie_comments#update', :as => 'movie_comments_update'
