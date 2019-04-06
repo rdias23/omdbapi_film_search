@@ -20,13 +20,23 @@ div.home_page_cont{
     }
     div.search_result_cont_inner_frame{
       text-align: center;
+      padding: 20px;
       div.title_box{
         span{
 
         }
       }
       div.poster_box{
-
+        text-align: left;
+        width: 600px;
+        margin: 0 auto;
+        img{
+          width: 300px;
+        }
+        div.comment_and_rating{
+          float: right;
+          width: calc(100% - 300px);
+        }
       }
       div.plot_box{
         max-width: 600px;

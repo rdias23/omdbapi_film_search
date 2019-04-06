@@ -11,12 +11,13 @@ class MoviesController < ApplicationController
     @user = current_user
     @movie = case response["Response"]
              when "True"
-               Movie.new(movie_attrs)
+               Movie.create(movie_attrs)
              when "False"
                Movie.new
              when "ignore_because_movie_is_already_in_db"
                movie_in_db
              end
+
     @select_or_deselect_action = if movie_in_db.nil?
                                    SELECT_ACTIONS[:SELECT]
                                  else
@@ -29,6 +30,8 @@ class MoviesController < ApplicationController
 
     @errors_msg = (response["Response"] == "False" ? "No movie matches" : false)
 
+    @movie_comment = @user.yield_movie_comment_of_user @movie
+
     respond_to do |format|
       format.js { render :file => "/home/search.js.erb" }
     end
@@ -37,6 +40,9 @@ class MoviesController < ApplicationController
   def edit
     @movie = Movie.find_by_imdb_id(params["movie"]["imdb_id"])
     @errors_msg = false
+
+    @user = current_user
+    @movie_comment = @user.yield_movie_comment_of_user @movie
 
     @select_or_deselect_action = if current_user.favorites_list.movies.ids.include? @movie.id
                                    SELECT_ACTIONS[:DESELECT]
@@ -57,6 +63,8 @@ class MoviesController < ApplicationController
      end
      @errors_msg = false
      @user = current_user
+     @movie_comment = @user.yield_movie_comment_of_user @movie
+
      @select_or_deselect_action = SELECT_ACTIONS[:DESELECT]
 
      @user.favorites_list.movies << @movie
@@ -69,6 +77,8 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params["movie"]["id"])
     @errors_msg = false
     @user = current_user
+    @movie_comment = @user.yield_movie_comment_of_user @movie
+
     @select_or_deselect_action = SELECT_ACTIONS[:SELECT]
 
     @user.favorites_list.favorite_selections.find_by_movie_id(@movie.id).remove_from_list
@@ -79,6 +89,27 @@ class MoviesController < ApplicationController
     end
   end
 
+  def move_up
+    movie = Movie.find_by_imdb_id(params["movie"]["imdb_id"])
+    favorite_selection = current_user.favorites_list.favorite_selections.find { |fs| fs.movie_id == movie.id }
+    favorite_selection.move_higher
+    @user = current_user
+
+    respond_to do |format|
+      format.js { render :file => "/home/move_up_or_down.js.erb" }
+    end
+  end
+
+  def move_down
+    movie = Movie.find_by_imdb_id(params["movie"]["imdb_id"])
+    favorite_selection = current_user.favorites_list.favorite_selections.find { |fs| fs.movie_id == movie.id }
+    favorite_selection.move_lower
+    @user = current_user
+
+    respond_to do |format|
+      format.js { render :file => "/home/move_up_or_down.js.erb" }
+    end
+  end
 
   private
 

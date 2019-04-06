@@ -1,0 +1,8 @@
+<span>Comment:</span><br/>
+ <%= @movie_comment.comment || "You have not commented yet" %><br/>
+ <%= form_for @movie_comment, :url => url_for(:controller => 'movie_comments', :action => 'edit'), remote: true do |f| %>
+   <%= f.hidden_field :user_id, :value => @user.id %>
+   <%= f.hidden_field :imdb_id, :value => @movie.imdb_id %>
+   <%= f.hidden_field :movie_id, :value => @movie.id %>
+   <%= f.submit "Edit Comment" %>
+ <% end %>

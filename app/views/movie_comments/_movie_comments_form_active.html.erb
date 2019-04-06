@@ -1,0 +1,8 @@
+<span>Comment:</span><br/>
+ <%= form_for @movie_comment, :url => url_for(:controller => 'movie_comments', :action => 'update'), remote: true do |f| %>
+   <%= f.text_area :comment, :value => @movie_comment.comment %>
+   <%= f.hidden_field :user_id, :value => @user.id %>
+   <%= f.hidden_field :imdb_id, :value => @movie.imdb_id %>
+   <%= f.hidden_field :movie_id, :value => @movie.id %>
+   <%= f.submit "Update Comment" %>
+ <% end %>

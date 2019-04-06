@@ -1,9 +1,33 @@
 
 <div class="movie_fave_item">
-  <span class="movie_title"><span class="movie_rank"><%= favorites_list.favorite_selections.find { |fs| fs.movie_id == movie.id }.position.to_s + "." %></span><%= movie.title %></span>
-     <%= form_for movie, :url => url_for(:controller => 'movies', :action => 'edit'), remote: true do |f| %>
-       <%= f.hidden_field :title %>
-       <%= f.hidden_field :imdb_id %>
-     <%= f.submit "View" %>
-    <% end %>
+
+ <div class="row">
+   <hr>
+   <div class="col-9">
+     <span class="movie_title"><span class="movie_rank"><%= rank.to_s + "." %></span><%= movie.title %></span>
+
+       <%= form_for movie, :url => url_for(:controller => 'movies', :action => 'edit'), remote: true do |f| %>
+         <%= f.hidden_field :title %>
+         <%= f.hidden_field :imdb_id %>
+         <%= f.submit "View" %>
+       <% end %>
+    </div>
+    <div class="col-3">
+       <% unless rank == 1 %>
+         <%= form_for movie, :url => url_for(:controller => 'movies', :action => 'move_up'), remote: true do |f| %>
+           <%= f.hidden_field :title %>
+           <%= f.hidden_field :imdb_id %>
+           <%= f.submit "up" %>
+         <% end %>
+       <% end %>
+       <% unless rank == favorites_list.movies.length %>
+         <%= form_for movie, :url => url_for(:controller => 'movies', :action => 'move_down'), remote: true do |f| %>
+           <%= f.hidden_field :title %>
+           <%= f.hidden_field :imdb_id %>
+           <%= f.submit "down" %>
+         <% end %>
+       <% end %>
+    </div>
+  </div>
+  <hr>
 </div>

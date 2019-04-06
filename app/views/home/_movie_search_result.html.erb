@@ -23,6 +23,15 @@
     </div>
     <div class="poster_box">
       <img src="<%= @movie.poster %>" alt="Movie Poster">
+      <div class="comment_and_rating">
+        <div class="rating_box">
+        </div>
+        <div class="comment_box">
+           <div class="comment_box_actual">
+             <%= render :partial => "/movie_comments/movie_comments_form_not_active", :locals => { } %>
+           </div>
+        </div>
+      </div>
     </div>
     <div class="plot_box">
       <%= @movie.plot %>
