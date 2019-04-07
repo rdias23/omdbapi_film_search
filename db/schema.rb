@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2019_04_06_204952) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "favorite_selections", force: :cascade do |t|
     t.integer "favorites_list_id"
     t.integer "movie_id"
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 2019_04_06_204952) do
 
   create_table "favorites_lists", force: :cascade do |t|
     t.string "title"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_favorites_lists_on_user_id"
@@ -30,8 +33,8 @@ ActiveRecord::Schema.define(version: 2019_04_06_204952) do
 
   create_table "movie_comments", force: :cascade do |t|
     t.text "comment"
-    t.integer "user_id"
-    t.integer "movie_id"
+    t.bigint "user_id"
+    t.bigint "movie_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "imdb_id"
@@ -41,8 +44,8 @@ ActiveRecord::Schema.define(version: 2019_04_06_204952) do
 
   create_table "movie_ratings", force: :cascade do |t|
     t.integer "rating_star_num"
-    t.integer "user_id"
-    t.integer "movie_id"
+    t.bigint "user_id"
+    t.bigint "movie_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_movie_ratings_on_movie_id"
@@ -76,4 +79,9 @@ ActiveRecord::Schema.define(version: 2019_04_06_204952) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "favorites_lists", "users"
+  add_foreign_key "movie_comments", "movies"
+  add_foreign_key "movie_comments", "users"
+  add_foreign_key "movie_ratings", "movies"
+  add_foreign_key "movie_ratings", "users"
 end

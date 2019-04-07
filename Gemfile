@@ -74,3 +74,5 @@ gem 'faraday'
 gem 'pry', '~> 0.12.2'
 
 gem 'acts_as_list'
+
+gem 'pg'

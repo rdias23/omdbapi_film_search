@@ -1,0 +1,22 @@
+br.devise_form_above + h2 {
+  padding-left: 40px;
+}
+
+form.new_user{
+  padding-left: 40px;
+}
+
+form.new_user + a[href*="sign_in"]{
+  padding-left: 40px;
+}
+
+a[href*="sign_up"],a[href*="password"]{
+  padding-left: 40px;
+}
+a[href*="sign_up"].navbar-link{
+  padding: 0px;
+}
+
+a[href*="/users/edit"].navbar-link{
+  display: none;
+}
