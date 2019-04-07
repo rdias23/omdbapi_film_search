@@ -24,9 +24,9 @@ Web Application Specs:<br/>
 	- Faraday - for actually making the connection to the OMDB<br/>API. The code is inside two classes, connection.rb and<br/>request.rb, located inside an omdb folder, located inside<br/> the 'lib' directory at the project root. Only<br/> searches by title that return full plots are<br/> functional, but these classes were built to make adding<br/> other types of searches easy.<br/>
 	- acts_as_list<br/>
 		- I decided to make the Favorites List easily sortable (e.g. if "Terminator 2" is #1 in the list, you can hit a down arrow to move it down by one position). The acts_as_list gem makes this easy... A User has a Favorites_List, that has and belongs to many Movies through a Favorite_Selection join table / Model with a position attribute used by acts_as_list.
-		- dotenv-rails - is used for storing application secret keys. In this case, that means 'OMDB_API_KEY' specified inside a '.env.development' file located in the project root. See below... Where the "XXXXXXXXXX"'s are is where the key information should be.<br/>
-			- $ cat .env.development<br/>
-				OMDB_API_KEY=XXXXXXXXXX<br/>
+	- dotenv-rails - is used for storing application secret keys. In this case, that means 'OMDB_API_KEY' specified inside a '.env.development' file located in the project root. See below... Where the "XXXXXXXXXX"'s are is where the key information should be.<br/>
+	- $ cat .env.development<br/>
+	  OMDB_API_KEY=XXXXXXXXXX<br/>
 - Application Architecture - It's a SPA (Single Page Application) that uses Rails AJAX submit forms with the "remote: true" option. Inside the controller actions you see respond_to blocks with format.js sections specifying *.js.erb files inside the View directories. Those *.js.erb files run javascript that appends rendered partials into the DOM.<br/>
 - Application Functionality - Meeting and Exceeding requested functionality<br/>
 	- User can search OMDB for Movies by Title using the Search form. Search results show: (1) Title (2) Year (3) poster (4) full summary.<br/>
