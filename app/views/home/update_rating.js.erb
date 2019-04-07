@@ -2,3 +2,6 @@ $('.navbar').after('<p style="position: absolute; width: 100%; top: 0px;" class=
 setTimeout(function(){
  $(".alert.alert-success").remove();
 },1600);
+$('div.faves_list')
+  .html("<%= escape_javascript( render(:partial => '/home/faves_list')) %>");
+$('span.average_rating_str_msg').html("<%= escape_javascript( @movie_rating.movie.average_rating_str_msg ) %>")

@@ -111,11 +111,14 @@ class MoviesController < ApplicationController
   end
 
   def update_rating
+    params["movie_rating"]["rating_star_num"] = 1 if params["movie_rating"]["rating_star_num"].blank?
     if params["movie_rating"]["id"].blank?
       @movie_rating = MovieRating.create(movie_rating_params)
     else
-      @movie_rating = MovieRating.find(params["movie_rating"]["id"]).update_attributes(movie_rating_params)
+      @movie_rating = MovieRating.find(params["movie_rating"]["id"])
+      @movie_rating.update_attributes(movie_rating_params)
     end
+    @user = current_user
     respond_to do |format|
       format.js { render :file => "/home/update_rating.js.erb" }
     end

@@ -4,7 +4,7 @@
  <div class="row fave_item_inner_frame">
    <hr>
    <div class="col-9 movie_title_and_view_cont">
-     <span class="movie_title"><span class="movie_rank"><%= rank.to_s + ". " %></span><%= movie.title %></span><br/>
+     <span class="movie_title"><span class="movie_rank"><%= rank.to_s + ". " %></span><%= movie.title %> (<%= movie.year %>) </span><br/>
        <span> Rating: <%=  movie.movie_ratings.length > 0 && movie.movie_ratings.find {|mr| mr.user_id == user.id } ? movie.movie_ratings.find {|mr| mr.user_id == user.id }.rating_star_num.to_s + " Stars"  : "Not Rated" %> </span>
 
        <%= form_for movie, :url => url_for(:controller => 'movies', :action => 'edit'), remote: true do |f| %>

@@ -20,6 +20,9 @@
         <%= @movie.title %>
       <br/>
       <span><%= @movie.year %></span>
+      <br/>
+      <span class="average_rating_str_msg"><%= @movie.average_rating_str_msg %></span>
+       <br/>
     </div>
     <div class="poster_box">
       <img src="<%= @movie.poster %>" alt="Movie Poster">
@@ -38,7 +41,14 @@
              <%= render :partial => "/movie_comments/movie_comments_form_not_active", :locals => { } %>
            </div>
         </div>
+        <div class="other_lists_box" style="<%= @movie.favorites_lists.reject { |fl| fl.user_id == @user.id }.length > 0 ? '' : 'display: none'; %>">
+          <span class="other_lists_box_header">Saved in other Fave Lists...</span><br/>
+          <% @movie.favorites_lists.reject { |fl| fl.user_id == @user.id }.each.with_index do |fl,i| %>
+           <span> <%= i + 1 %>. <%= fl.user.email %></span><br/>
+          <% end %>
+        </div>
       </div>
+
     </div>
     <div class="plot_box">
       <%= @movie.plot %>
