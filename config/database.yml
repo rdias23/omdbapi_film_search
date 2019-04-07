@@ -25,5 +25,3 @@ test:
 production:
   <<: *default
   database: film_fan_favorites_production
-  username: film_fan_favorites
-  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
